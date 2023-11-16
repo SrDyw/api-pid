@@ -1,21 +1,32 @@
-
 import { Router } from "express";
+import {
+  getUserRouteHandler,
+  insertUserRouteHandler,
+  poblateRouteHandler,
+  removeUserRouteHandler,
+  updateUserRouteHandler,
+} from "./controllers.routes.js";
+import { mainConfig } from "../config/mainConffig.js";
 
 const router = Router();
-const baseURL = "/api";
 
-router.get('/', (req, res) => {
-    return res.send("Hello World");
-})
+router.get("/", (req, res) => {
+  return res.send("Welcome to api for user crud");
+});
 
+const localMiddleware = (req, res, next) => {
+  if (mainConfig.local) {
+    return res.send("Can modidy data in local enviroment");
+  }
+  next();
+};
 
-router.get(`${baseURL}/employees`, (req, res) => {
-    return res.send("Hired!");
-})
+router.get("/user/:atr", getUserRouteHandler);
+router.get("/poblate", localMiddleware, poblateRouteHandler);
+router.post("/user/create", localMiddleware, insertUserRouteHandler);
+router.put("/user/update", localMiddleware, updateUserRouteHandler)
+router.delete("/user/delete/:value", localMiddleware, removeUserRouteHandler);
 
-router.post(`${baseURL}/employees`, (req, res) => {
-    console.log("Ocurrio un post!");
-})
 
 
 export default router;

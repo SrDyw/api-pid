@@ -1,13 +1,26 @@
 import Express from "express";
 import router from "./routes/index.routes.js";
+import config from './config/index.config.js'
+import  "./database/index.database.js";
 
+// server init
 const app = Express();
 
-app.use(router);
+// config
 
+// connect();
 
+config();
+const PORT = process.env.PORT || 4000;
 
-app.listen(3000, () => {
-    console.log(`Server on port ${3000}`);
-})
+// middlewares
+app.use(Express.json());
 
+// routes
+app.get("/", (req, res) => res.redirect("/api"));
+app.use("/api", router);
+
+app.listen(PORT, () => {
+  console.log("============================[SERVER RESTARTED]==========================================")
+  console.log(`Server running on http://localhost:3000`);
+});
