@@ -33,7 +33,7 @@ export const insertUserRouteHandler = async (req, res) => {
 };
 
 export const poblateRouteHandler = async (req, res) => {
-  const response = await poblate();
+  const response = await poblate(req.params.amt || 1);
 
   if (!response.isError()) {
     return res.status(200).send(response.result);

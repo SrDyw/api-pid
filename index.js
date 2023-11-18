@@ -1,7 +1,6 @@
 import Express from "express";
 import router from "./routes/index.routes.js";
 import config from './config/index.config.js'
-import  "./database/index.database.js";
 
 // server init
 const app = Express();

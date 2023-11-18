@@ -22,7 +22,7 @@ const localMiddleware = (req, res, next) => {
 };
 
 router.get("/user/:atr", getUserRouteHandler);
-router.get("/poblate", localMiddleware, poblateRouteHandler);
+router.get("/poblate/:amt", localMiddleware, poblateRouteHandler);
 router.post("/user/create", localMiddleware, insertUserRouteHandler);
 router.put("/user/update", localMiddleware, updateUserRouteHandler)
 router.delete("/user/delete/:value", localMiddleware, removeUserRouteHandler);
